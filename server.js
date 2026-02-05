@@ -23,6 +23,22 @@ app.use('/api/business', businessRoutes);
 app.use('/api/creator', creatorRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Root route
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Rewards App API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      business: '/api/business',
+      creator: '/api/creator',
+      admin: '/api/admin',
+      categories: '/api/categories'
+    }
+  });
+});
+
 // Public routes
 app.get('/api/categories', getAllCategories);
 

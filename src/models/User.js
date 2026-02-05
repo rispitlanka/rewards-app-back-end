@@ -58,9 +58,10 @@ const userSchema = new mongoose.Schema({
 });
 
 // Pre-save middleware to update updatedAt field
-userSchema.pre('save', function(next) {
-  this.updatedAt = Date.now();
-  next();
+userSchema.pre('save', async function() {
+  if (this.isModified() || this.isNew) {
+    this.updatedAt = Date.now();
+  }
 });
 
 // Indexes are defined on the fields above (unique: true / index: true)
